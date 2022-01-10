@@ -1,0 +1,61 @@
+.main {
+    background-color: #ff0000;
+    display: grid; /* div changed to grid */
+    grid-template-columns: repeat(3, 1fr); /*how many columns*/
+    grid-template-rows: 70px 70px 70px 450px; /*how many rows*/
+    grid-gap: 10px; /*gap between divs*/
+}
+
+.title {
+    background-color: #00cc00;
+    text-align: center; /* title on the center */
+    grid-column: 1/4; /*range columns*/
+    grid-row: 1; /*range rows*/
+}
+
+.time_box {
+    background-color: #30799B;
+    text-align: center; /* title on the center */
+    grid-column: 1; /*range columns*/
+    grid-row: 2; /*range rows*/
+}
+
+.highest_score_box {
+    background-color: #cc0099;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
+}
+
+.move_box {
+    background-color: #0033cc;
+    grid-column: 3;
+    grid-row: 2;
+    text-align: left;
+}
+
+.stop_time {
+    background-color: #ffff00;
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.username {
+    background-color: #3A7734;
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.back_to_menu {
+    background-color: #ffbf80;
+    grid-column: 3;
+    grid-row: 3;
+    text-align: center;
+}
+
+.board {
+    background-color: #C76700;
+    grid-column: 1/4;
+    grid-row: 4;
+    text-align: center;
+}
