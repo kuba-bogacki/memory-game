@@ -1,0 +1,43 @@
+.background-box {
+    background-color: darkgray;
+    border-color: grey;
+    border: 3px solid;
+    border-radius: 3em;
+    padding: 50px 50px 50px 50px;
+}
+
+.select {
+    background-color: white;
+    border-radius: 0.2em;
+    color: black;
+    font-family: Arial;
+    font-size: 2em;
+    margin: 0 0 0.5em;
+    padding: 10px 20px;
+}
+
+
+.select-text {
+    font-size: 3.5em;
+}
+
+
+.start_game_button {
+    background-color: white;
+    border-radius: 0.3em;
+    color: black;
+    font-family: Arial;
+    font-size: 3em;
+    margin: 1.5em 0 0;
+    text-align: center;
+    width: 20%;
+}
+
+
+.welcome {
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 10em;
+}
