@@ -5,8 +5,27 @@
     <meta charset="UTF-8">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
+    <link href="../static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+    <div class="background-box">
+        <div class="welcome">
+            <h1 class="welcome-text">Welcome</h1>
+        </div>
+        <div class="welcome">
+            <form action="game.html">
+                <div>
+                    <select name="level of difficulty" class="select-difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal">Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div>
+                    <button name="start_game" class="start_game_button">Start Game</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
