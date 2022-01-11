@@ -1,0 +1,70 @@
+.main {
+    display: grid; /* div changed to grid */
+    grid-template-columns: repeat(3, 1fr); /*how many columns*/
+    grid-template-rows: 70px 70px 70px 450px; /*how many rows*/
+    grid-gap: 10px; /*gap between divs*/
+}
+
+.title {
+    text-align: center; /* title on the center */
+    grid-column: 1/4; /*range columns*/
+    grid-row: 1; /*range rows*/
+}
+
+.time_box {
+    text-align: center; /* title on the center */
+    grid-column: 1; /*range columns*/
+    grid-row: 2; /*range rows*/
+    border-radius: 10px; /* corner round */
+    border-style: solid; /* div border */
+    border-color: black;
+}
+
+.highest_score_box {
+
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
+}
+
+.move_box {
+    grid-column: 3;
+    grid-row: 2;
+    border-radius: 10px; /* corner round */
+    border-style: solid; /* div border */
+    border-color: black;
+    text-align: center; /* title on the center */
+}
+
+.stop_time {
+    grid-column: 1;
+    grid-row: 3;
+    text-align: center; /* title on the center */
+}
+
+.username {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: center; /* title on the center */
+}
+
+.back_to_menu {
+    grid-column: 3;
+    grid-row: 3;
+    text-align: center;
+}
+
+.board {
+    grid-column: 1/4;
+    grid-row: 4;
+    text-align: center;
+}
+
+.button{
+    border-radius: 10px; /* corner round */
+    border-style: solid; /* div border */
+    border-color: black;
+    text-align: center; /* title on the center */
+    font-size: 20px;
+    padding: 10px 10px;
+}
