@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
-    <link href="../static/style.css" rel="stylesheet" type="text/css">
+    <link href="../static/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="background-box">
@@ -15,10 +15,22 @@
         <div class="welcome">
             <form action="game.html">
                 <div>
-                    <select name="level of difficulty" class="select-difficulty">
+                    <h1 class="select-text">Select level</h1>
+                </div>
+                <div>
+                    <select name="level of difficulty" class="select">
                         <option value="easy">Easy</option>
                         <option value="normal">Normal</option>
                         <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div>
+                    <h1 class="select-text">Do you want time limit</h1>
+                </div>
+                <div>
+                    <select name="is time" class="select">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
                     </select>
                 </div>
                 <div>
