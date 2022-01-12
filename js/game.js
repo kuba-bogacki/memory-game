@@ -8,6 +8,7 @@ let difficulty = 0;
 let gameArray = [];
 let allCards = [];
 let actualPairs = [];
+let user_name = '';
 
 for (let x = 1; x <= 35; x++){
     if (x < 10){
@@ -20,6 +21,8 @@ function initGame() {
     const queryString = window.location.search; // zwraca cały url
     const urlParams = new URLSearchParams(queryString); // odcina to co jest po ? wyciąga klucze i wartości
     is_time = urlParams.get('is_time'); // wyciągam konkretną wartość
+    user_name = urlParams.get('user-name');
+    create_user_name();
     const level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
     let gameField = document.getElementById("board");
     if (is_time === "yes"){
@@ -46,6 +49,10 @@ function create_pairs(level){
     else if (level === "hard"){
         return  32;
     }
+}
+
+function create_user_name(){
+    document.getElementsByClassName('username')[0].innerHTML = "<h3>Your name: " + user_name + "</h3>";
 }
 
 function create_time(level){
@@ -160,6 +167,7 @@ function leftClick(){
                 //console.log(card_image)
                 field.innerHTML = '<img src=' + card_image +'>';
                 actualPairs.push(field);
+                field.style.pointerEvents = 'none';
 
                 if (actualPairs.length === 2){
                     console.dir(document.querySelector('.board'));
@@ -202,6 +210,7 @@ function differentCards(){
     setTimeout(() => {
         for (let card of actualPairs) {
             card.innerHTML = '<img src="../cards/back.png">';
+            card.style.pointerEvents = 'auto';
         }
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
