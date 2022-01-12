@@ -241,13 +241,13 @@ function change_time_statistic(stop, button, event) {
 
 function stop_the_time() {
     if (stop_time) {
-        change_time_statistic(false, 'STOP TIME', 'auto');
+        change_time_statistic(false, 'PAUSE', 'auto');
         if (is_time === "yes") {
             timeCounter = setInterval(decrease_time, 1000);
             lose = setInterval(lose_with_timeout, 1000);
         }
     } else {
-        change_time_statistic(true, 'START TIME', 'none');
+        change_time_statistic(true, 'RESUME', 'none');
         if (is_time === "yes") {
             clearInterval(timeCounter);
             clearInterval(lose);
