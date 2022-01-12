@@ -6,7 +6,8 @@ let pairs = 0;
 let is_time;
 let difficulty = 0;
 let gameArray = [];
-sessionStorage.setItem('timeNumberOne', "2");
+sessionStorage.setItem('time', "1");// wciśnięte na sztywno do display score do usunięcia
+sessionStorage.setItem('moves', "5")// tak samo
 
 let allCards = [];
 let actualPairs = [];
@@ -65,12 +66,12 @@ function create_time(level){
 }
 
 function displayHighestScoreWithTime() {
-    document.getElementById('highest_score').innerHTML = "<h4>Highest score: " + sessionStorage.getItem("timeNumberOne") + "</h4>";
+    document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("time") + "</h4>";
 }
 
 
 function displayHighestScoreWithoutTime() {
-    document.getElementById()
+    document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("moves") + "</h4>";
 }
 
 
@@ -116,32 +117,16 @@ function win_without_timeout(){
 
 //
 function saveItemToSessionStorageWithTime() {
-    if (localStorage.getItem('timeNumberOne') < time) {
-        sessionStorage.setItem('userNameTimeNumberOne', "(nazwa użytkownika)");
-        sessionStorage.setItem('timeNumberOne', time);
-    }
-    else if (localStorage.getItem('timeNumberTwo') < time) {
-        sessionStorage.setItem('userNameTimeNumberTwo', "(nazwa użytkownika)");
-        sessionStorage.setItem('timeNumberTwo', time);
-    }
-    else if (localStorage.getItem('timeNumberThree') < time) {
-        sessionStorage.setItem('userNameTimeNumberThree', "(nazwa urzytkownika)");
-        sessionStorage.setItem('timeNumberThree', time);
+    if (localStorage.getItem('time') < time) {
+        sessionStorage.setItem('userNameTime', "(nazwa użytkownika)");
+        sessionStorage.setItem('time', time);
     }
 }
 
 function saveItemToSessionStorageWithoutTime() {
-    if (localStorage.getItem('movesNumberOne') > moves) {
-        sessionStorage.setItem('userNameNumberOne', "(nazwa użytkownika)");
-        sessionStorage.setItem('movesNumberOne', moves);
-    }
-    else if (localStorage.getItem('movesNumberTwo') > moves) {
-        sessionStorage.setItem('userNameNumberTwo', "(nazwa urzytkownika)");
-        sessionStorage.setItem('movesNumberTwo', moves);
-    }
-    else if (localStorage.getItem('movesNumberThree') > moves) {
-        sessionStorage.setItem('userNameNumberThree', "(nazwa urzytkownika)");
-        sessionStorage.setItem('movesNumberThree', moves);
+    if (localStorage.getItem('moves') > moves) {
+        sessionStorage.setItem('userName', "(nazwa użytkownika)");
+        sessionStorage.setItem('moves', moves);
     }
 }
 //
