@@ -6,24 +6,24 @@ let pairs = 0;
 let is_time;
 let difficulty = 0;
 let gameArray = [];
-let allCards = ["../images/card_01.png", "../images/card_02.png", "../images/card_03.png", "../images/card_04.png",
-            "../images/card_05.png", "../images/card_06.png", "../images/card_07.png", "../images/card_08.png",
-            "../images/card_09.png", "../images/card_10.png", "../images/card_11.png", "../images/card_12.png",
-            "../images/card_13.png", "../images/card_14.png", "../images/card_15.png", "../images/card_16.png",
-            "../images/card_17.png", "../images/card_18.png", "../images/card_19.png", "../images/card_20.png",
-            "../images/card_21.png", "../images/card_22.png", "../images/card_23.png", "../images/card_24.png",
-            "../images/card_25.png", "../images/card_26.png", "../images/card_27.png", "../images/card_28.png",
-            "../images/card_29.png", "../images/card_30.png", "../images/card_31.png", "../images/card_32.png",
-            "../images/card_33.png", "../images/card_34.png", "../images/card_35.png"];
 sessionStorage.setItem('timeNumberOne', "2");
 
+let allCards = [];
+let actualPairs = [];
+
+for (let x = 1; x <= 35; x++){
+    if (x < 10){
+        x = "0" + x.toString();
+    }
+    allCards.push('../cards/card_' + x + '.png');
+}
 
 function initGame() {
     const queryString = window.location.search; // zwraca cały url
     const urlParams = new URLSearchParams(queryString); // odcina to co jest po ? wyciąga klucze i wartości
     is_time = urlParams.get('is_time'); // wyciągam konkretną wartość
     const level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
-    let gameField = document.querySelector(".board");
+    let gameField = document.getElementById("board");
     if (is_time === "yes"){
         create_time(level);
         timeCounter = setInterval(decrease_time, 1000);
@@ -33,8 +33,8 @@ function initGame() {
     else {
         displayHighestScoreWithoutTime();
     }
-    create_pairs(level);
-    // levelOfDifficulty();
+    pairs = create_pairs(level);
+    difficulty = create_pairs(level);
     pairCardsToLevel(difficulty);
     shuffleCards();
     createArr(difficulty, gameField);
@@ -42,25 +42,15 @@ function initGame() {
 
 function create_pairs(level){
     if (level === "easy"){
-        pairs = 4;
+        return  8;
     }
     else if (level === "normal"){
-        pairs = 15;
+        return  16;
     }
     else if (level === "hard"){
-        pairs = 35;
+        return  32;
     }
 }
-
-// function levelOfDifficulty(level) {
-//     if (level === "easy") {
-//         difficulty = 8;
-//     } else if (level === "normal") {
-//         difficulty = 16;
-//     } else if (level === "hard") {
-//         difficulty = 32;
-//     }
-// }
 
 function create_time(level){
     if (level === "easy"){
@@ -166,14 +156,11 @@ function lose_with_timeout(){
 }
 
 function pairCardsToLevel(difficulty) {
-    for (let i=0; i<(allCards.length); i++) {
+    while (gameArray.length <= difficulty * 2) {
         let item = allCards[Math.floor(Math.random()*allCards.length)];
         if (!gameArray.includes(item)) {
             gameArray.push(item);
             gameArray.push(item);
-            if (gameArray.length === (2 * difficulty)) {
-                break;
-            }
         }
     }
 }
@@ -188,6 +175,7 @@ function shuffleCards() {
 }
 
 function createArr(difficulty, gameField) {
+    console.log(difficulty);
     let rows = (difficulty * 2) / 8;
     let cols = (difficulty * 2) / rows;
     for (let row = 0; row < rows; row++) {
@@ -197,6 +185,8 @@ function createArr(difficulty, gameField) {
             gameArray.shift()
         }
     }
+    // zatrzymanie czasu  zatrzymanie możliwości klikania for??
+    // odwrócenie elementów, podmiana obrazka na back.png
 }
 
 function addRow(gameField) {
@@ -207,5 +197,5 @@ function addRow(gameField) {
 
 function addCell(rowElement, row, col, gameArray) {
     rowElement.insertAdjacentHTML('beforeend',
-        `<div class="element" data-row="${row}" data-col="${col}"><img src="${gameArray[0]}"></div>`);
+        `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="${gameArray[0]}"></div>`);
 }
