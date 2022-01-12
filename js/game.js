@@ -32,6 +32,8 @@ function initGame() {
     pairCardsToLevel(difficulty);
     shuffleCards();
     createArr(difficulty, gameField);
+    leftClick();
+    rightClick();
 }
 
 function create_pairs(level){
@@ -104,7 +106,7 @@ function lose_with_timeout(){
 }
 
 function pairCardsToLevel(difficulty) {
-    while (gameArray.length <= difficulty * 2) {
+    while (gameArray.length < difficulty * 2) {
         let item = allCards[Math.floor(Math.random()*allCards.length)];
         if (!gameArray.includes(item)) {
             gameArray.push(item);
@@ -130,7 +132,7 @@ function createArr(difficulty, gameField) {
         let rowElement = addRow(gameField);
         for (let col = 0; col < cols; col++) {
             addCell(rowElement, row, col, gameArray);
-            gameArray.shift()
+            gameArray.shift();
         }
     }
     // zatrzymanie czasu  zatrzymanie możliwości klikania for??
@@ -145,5 +147,62 @@ function addRow(gameField) {
 
 function addCell(rowElement, row, col, gameArray) {
     rowElement.insertAdjacentHTML('beforeend',
-        `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="${gameArray[0]}"></div>`);
+        `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="../cards/back.png"></div>`);
+}
+
+function leftClick(){
+    const fields = document.querySelectorAll('.board .row .card');
+    for (let field of fields) {
+            // we add the same event listener for the right click (so called contextmenu) event
+            field.addEventListener('click', function (event) {
+                // so if you left click on any field...
+                let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
+                //console.log(card_image)
+                field.innerHTML = '<img src=' + card_image +'>';
+                actualPairs.push(field);
+
+                if (actualPairs.length === 2){
+                    console.dir(document.querySelector('.board'));
+                    document.querySelector('.board').style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
+                    if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')){
+                        theSameCards();
+                    }
+                    else {
+                        differentCards();
+                    }
+                    document.querySelector('.board').style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
+                    increase_moves();
+                }
+            });
+        }
+}
+
+function rightClick(){
+    const fields = document.querySelectorAll('.board .row .card');
+    for (let field of fields) {
+            // we add the same event listener for the right click (so called contextmenu) event
+            field.addEventListener('contextmenu', function (event) {
+                // so if you left click on any field...
+                event.preventDefault();
+            });
+        }
+}
+
+function theSameCards(){
+    for (let card of actualPairs){
+        card.style.opacity = 0.3;
+        card.style.pointerEvents = 'none'; // turn off clicking on the element
+    }
+    decrease_pairs();
+    actualPairs = []; // czyszczenie tablicy
+
+}
+
+function differentCards(){
+    setTimeout(() => {
+        for (let card of actualPairs) {
+            card.innerHTML = '<img src="../cards/back.png">';
+        }
+        actualPairs = []; // czyszczenie tablicy
+    }, 1000); // wstrzymanie czasu
 }
