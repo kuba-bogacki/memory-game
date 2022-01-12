@@ -89,3 +89,4 @@ function lose_with_timeout(){
         location.href = 'index.html';
     }
 }
+
