@@ -33,6 +33,7 @@ function initGame() {
     shuffleCards();
     createArr(difficulty, gameField);
     leftClick();
+    rightClick();
 }
 
 function create_pairs(level){
@@ -170,7 +171,19 @@ function leftClick(){
                         differentCards();
                     }
                     document.querySelector('.board').style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
+                    increase_moves();
                 }
+            });
+        }
+}
+
+function rightClick(){
+    const fields = document.querySelectorAll('.board .row .card');
+    for (let field of fields) {
+            // we add the same event listener for the right click (so called contextmenu) event
+            field.addEventListener('contextmenu', function (event) {
+                // so if you left click on any field...
+                event.preventDefault();
             });
         }
 }
