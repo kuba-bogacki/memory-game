@@ -6,7 +6,7 @@
     <link href="../static/game.css" rel="stylesheet" type="text/css">
     <script src="../js/game.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="initGame()">
     <div class="main">
         <div class="title"><h1>MEMO GAME</h1></div>
         <div class="time_box"><h3>Time left:</h3></div>
@@ -21,7 +21,7 @@
                 <input class="button" type="submit" value="BACK TO  MENU">
             </form>
         </div>
-        <div class="board"></div>
+        <div id="board" class="board"></div>
     </div>
 </body>
 </html>
