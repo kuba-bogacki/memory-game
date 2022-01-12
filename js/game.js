@@ -10,6 +10,7 @@ let allCards = [];
 let actualPairs = [];
 let user_name = '';
 let stop_time = false;
+let backCard = "../cards/back.png"
 
 for (let x = 1; x <= 35; x++){
     if (x < 10){
@@ -36,19 +37,18 @@ function initGame() {
     pairCardsToLevel(difficulty);
     shuffleCards();
     createArr(difficulty, gameField);
+    setTimeout(rotateCards, 3000);
     leftClick();
     rightClick();
 }
 
-function create_pairs(level){
-    if (level === "easy"){
-        return  8;
-    }
-    else if (level === "normal"){
-        return  16;
-    }
-    else if (level === "hard"){
-        return  32;
+function create_pairs(level) {
+    if (level === "easy") {
+        return 8;
+    } else if (level === "normal") {
+        return 16;
+    } else if (level === "hard") {
+        return 32;
     }
 }
 
@@ -114,7 +114,7 @@ function lose_with_timeout(){
 }
 
 function pairCardsToLevel(difficulty) {
-    while (gameArray.length < difficulty * 2) {
+    while (gameArray.length <= difficulty * 2) {
         let item = allCards[Math.floor(Math.random()*allCards.length)];
         if (!gameArray.includes(item)) {
             gameArray.push(item);
@@ -143,8 +143,8 @@ function createArr(difficulty, gameField) {
             gameArray.shift();
         }
     }
-    // zatrzymanie czasu  zatrzymanie możliwości klikania for??
-    // odwrócenie elementów, podmiana obrazka na back.png
+    let holdBoard = document.getElementsByClassName('board');
+    holdBoard[0].style.pointerEvents = 'none';
 }
 
 function addRow(gameField) {
@@ -155,7 +155,16 @@ function addRow(gameField) {
 
 function addCell(rowElement, row, col, gameArray) {
     rowElement.insertAdjacentHTML('beforeend',
-        `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="../cards/back.png"></div>`);
+        `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="${gameArray[0]}"></div>`);
+}
+
+function rotateCards() {
+    let rotateElement = document.getElementsByClassName('card');
+    for (let element of rotateElement) {
+        element.innerHTML = `<img src=${backCard}>`
+    }
+    let runBoard = document.getElementsByClassName('board');
+    runBoard[0].style.pointerEvents = 'auto';
 }
 
 function leftClick(){
