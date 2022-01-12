@@ -1,6 +1,7 @@
 let time = 0;
 let timeCounter;
 let lose;
+let level;
 let moves = 0;
 let pairs = 0;
 let is_time;
@@ -22,12 +23,16 @@ function initGame() {
     const queryString = window.location.search; // zwraca cały url
     const urlParams = new URLSearchParams(queryString); // odcina to co jest po ? wyciąga klucze i wartości
     is_time = urlParams.get('is_time'); // wyciągam konkretną wartość
-    const level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
+    level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
     let gameField = document.getElementById("board");
     if (is_time === "yes"){
         create_time(level);
         timeCounter = setInterval(decrease_time, 1000);
         lose = setInterval(lose_with_timeout, 1000);
+        displayHighestScoreWithTime();
+    }
+    else {
+        displayHighestScoreWithoutTime();
     }
     pairs = create_pairs(level);
     difficulty = create_pairs(level);
@@ -61,6 +66,32 @@ function create_time(level){
     }
 }
 
+function displayHighestScoreWithTime() {
+    if (level === 'easy') {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeEasy") + "</h4>";
+    }
+    else if (level === 'normal') {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeNormal") + "</h4>";
+    }
+    else if (level === 'hard') {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeHard") + "</h4>";
+    }
+}
+
+
+function displayHighestScoreWithoutTime() {
+    if (level === 'easy') {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesEasy") + "</h4>";
+    }
+    else if (level === 'normal') {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesNormal") + "</h4>";
+    }
+    else if (level === 'hard') {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesHard") + "</h4>";
+    }
+}
+
+
 function decrease_time(){
     time -= 1;
     document.getElementsByClassName('time_box')[0].innerHTML = "<h3>Time left: " + time + "</h3>";
@@ -86,16 +117,73 @@ function win_with_timeout(){
     clearInterval(timeCounter);
     clearInterval(lose);
     alert('YOU WIN');
-    // zapis wyniku
+    saveItemToSessionStorageWithTime();
     location.href = 'index.html';
 
 }
 
 function win_without_timeout(){
     alert('YOU WIN');
-    // zapis wyniku
+    saveItemToSessionStorageWithoutTime();
     location.href = 'index.html';
 }
+
+
+function saveItemToSessionStorageWithTime() {
+
+        if (level === 'easy') {
+            if (sessionStorage.getItem('time') < time) {
+                sessionStorage.removeItem('userNameTimeEasy');
+                sessionStorage.removeItem('timeEasy');
+                sessionStorage.setItem('userNameTimeEasy', "(nazwa użytkownika)");
+                sessionStorage.setItem('timeEasy', time);
+            }
+        }
+        else if (level === 'normal') {
+            if (sessionStorage.getItem('time') < time) {
+                sessionStorage.removeItem('userNameTimeNormal');
+                sessionStorage.removeItem('timeNormal');
+                sessionStorage.setItem('userNameTimeNormal', "(nazwa użytkownika)");
+                sessionStorage.setItem('timeNormal', time);
+            }
+        }
+        else if (level === 'hard') {
+            if (sessionStorage.getItem('time') < time) {
+                sessionStorage.removeItem('userNameTimeHard');
+                sessionStorage.removeItem('timeHard');
+                sessionStorage.setItem('userNameTimeHard', "(nazwa użytkownika)");
+                sessionStorage.setItem('timeHard', time);
+            }
+        }
+}
+
+function saveItemToSessionStorageWithoutTime() {
+    if (level === 'easy') {
+        if (sessionStorage.getItem('movesEasy') < moves) {
+            sessionStorage.removeItem('userNameEasy');
+            sessionStorage.removeItem('movesEasy');
+            sessionStorage.setItem('userNameEasy', "(nazwa użytkownika)");
+            sessionStorage.setItem('movesEasy', moves);
+        }
+    }
+    if (level === 'normal') {
+        if (sessionStorage.getItem('movesNormal') < moves) {
+            sessionStorage.removeItem('userNameNormal');
+            sessionStorage.removeItem('movesNormal');
+            sessionStorage.setItem('userNameNormal', "(nazwa użytkownika)");
+            sessionStorage.setItem('movesNormal', moves);
+        }
+    }
+    if (level === 'hard') {
+        if (sessionStorage.getItem('movesHard') < moves) {
+            sessionStorage.removeItem('userNameHard');
+            sessionStorage.removeItem('movesHard');
+            sessionStorage.setItem('userNameHard', "(nazwa użytkownika)");
+            sessionStorage.setItem('movesHard', moves);
+        }
+    }
+}
+
 
 function lose_with_timeout(){
     if (time === 0){
