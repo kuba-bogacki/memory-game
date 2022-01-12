@@ -6,11 +6,11 @@
     <link href="../static/game.css" rel="stylesheet" type="text/css">
     <script src="../js/game.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="initGame()">
     <div class="main">
         <div class="title"><h1>MEMO GAME</h1></div>
         <div class="time_box"><h3>Time left:</h3></div>
-        <div class="highest_score_box"><h4>Highest score:</h4></div>
+        <div class="highest_score_box" id="highest_score"><h4>Highest score:</h4></div>
         <div class="move_box"><h3>Total moves:</h3></div>
         <div class="stop_time">
             <button class="button">STOP TIME</button>

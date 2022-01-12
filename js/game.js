@@ -15,9 +15,8 @@ let allCards = ["../images/card_01.png", "../images/card_02.png", "../images/car
             "../images/card_25.png", "../images/card_26.png", "../images/card_27.png", "../images/card_28.png",
             "../images/card_29.png", "../images/card_30.png", "../images/card_31.png", "../images/card_32.png",
             "../images/card_33.png", "../images/card_34.png", "../images/card_35.png"];
+sessionStorage.setItem('timeNumberOne', "2");
 
-
-initGame();
 
 function initGame() {
     const queryString = window.location.search; // zwraca cały url
@@ -29,6 +28,10 @@ function initGame() {
         create_time(level);
         timeCounter = setInterval(decrease_time, 1000);
         lose = setInterval(lose_with_timeout, 1000);
+        displayHighestScoreWithTime();
+    }
+    else {
+        displayHighestScoreWithoutTime();
     }
     create_pairs(level);
     // levelOfDifficulty();
@@ -71,6 +74,16 @@ function create_time(level){
     }
 }
 
+function displayHighestScoreWithTime() {
+    document.getElementById('highest_score').innerHTML = "<h4>Highest score: " + sessionStorage.getItem("timeNumberOne") + "</h4>";
+}
+
+
+function displayHighestScoreWithoutTime() {
+    document.getElementById()
+}
+
+
 function decrease_time(){
     time -= 1;
     document.getElementsByClassName('time_box')[0].innerHTML = "<h3>Time left: " + time + "</h3>";
@@ -97,7 +110,7 @@ function win_with_timeout(){
     clearInterval(lose);
     alert('YOU WIN');
     // zapis wyniku
-    saveItemToSessionStorageWithTime()
+    saveItemToSessionStorageWithTime();
     //
     location.href = 'index.html';
 
@@ -106,24 +119,39 @@ function win_with_timeout(){
 function win_without_timeout(){
     alert('YOU WIN');
     // zapis wyniku
-    saveItemToSessionStorageWithoutTime()
+    saveItemToSessionStorageWithoutTime();
     //
     location.href = 'index.html';
 }
 
 //
 function saveItemToSessionStorageWithTime() {
-    if (0) {
-        sessionStorage.setItem('userName', "(nazwa użytkownika)")
-        sessionStorage.setItem('moves', moves)
-        sessionStorage.setItem('time', time)
+    if (localStorage.getItem('timeNumberOne') < time) {
+        sessionStorage.setItem('userNameTimeNumberOne', "(nazwa użytkownika)");
+        sessionStorage.setItem('timeNumberOne', time);
+    }
+    else if (localStorage.getItem('timeNumberTwo') < time) {
+        sessionStorage.setItem('userNameTimeNumberTwo', "(nazwa użytkownika)");
+        sessionStorage.setItem('timeNumberTwo', time);
+    }
+    else if (localStorage.getItem('timeNumberThree') < time) {
+        sessionStorage.setItem('userNameTimeNumberThree', "(nazwa urzytkownika)");
+        sessionStorage.setItem('timeNumberThree', time);
     }
 }
 
 function saveItemToSessionStorageWithoutTime() {
-    if (0) {
-        sessionStorage.setItem('userName', "(nazwa użytkownika)")
-        sessionStorage.setItem('moves', moves)
+    if (localStorage.getItem('movesNumberOne') > moves) {
+        sessionStorage.setItem('userNameNumberOne', "(nazwa użytkownika)");
+        sessionStorage.setItem('movesNumberOne', moves);
+    }
+    else if (localStorage.getItem('movesNumberTwo') > moves) {
+        sessionStorage.setItem('userNameNumberTwo', "(nazwa urzytkownika)");
+        sessionStorage.setItem('movesNumberTwo', moves);
+    }
+    else if (localStorage.getItem('movesNumberThree') > moves) {
+        sessionStorage.setItem('userNameNumberThree', "(nazwa urzytkownika)");
+        sessionStorage.setItem('movesNumberThree', moves);
     }
 }
 //
