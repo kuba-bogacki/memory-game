@@ -2,7 +2,7 @@ body {
     background-color: rgba(233,230,227,0.92);
 }
 
-.flex-container, .player {
+.flex-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -11,16 +11,16 @@ body {
     list-style: none;
 }
 
-.flex-item, .player {
+.flex-item, .player, .scores {
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
     height: 10%;
-    margin-top: 10px;
-    line-height: 150px;
+    margin-top: 30px;
+    line-height: 90px;
     color: black;
     font-family: monospace;
     grid-column: 1/4;
     grid-row: 1;
-    font-size: 3em;
+    font-size: 5em;
     text-align: center;
     border-radius: 25px;
     background: beige;
@@ -28,6 +28,19 @@ body {
     width: 50%;
 }
 
+.player {
+    font-size: 3em;
+    height: 10%;
+    margin-top: 10px;
+    line-height: 30px;
+}
+
+.scores {
+    font-size: 2em;
+    height: 10%;
+    margin-top: 10px;
+    line-height: 5px;
+}
 
 .button {
     background-color: beige;
