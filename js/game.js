@@ -9,6 +9,7 @@ let gameArray = [];
 let allCards = [];
 let actualPairs = [];
 let user_name = '';
+let stop_time = false;
 
 for (let x = 1; x <= 35; x++){
     if (x < 10){
@@ -172,6 +173,7 @@ function leftClick(){
                 if (actualPairs.length === 2){
                     console.dir(document.querySelector('.board'));
                     document.querySelector('.board').style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
+                    console.log(document.querySelector('.board').style.pointerEvents)
                     if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')){
                         theSameCards();
                     }
@@ -214,4 +216,13 @@ function differentCards(){
         }
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
+}
+
+function stop_the_time(){
+    if (stop_time){
+        //włączenie gry
+    }
+    else {
+        //zatrzymanie czasu
+    }
 }
