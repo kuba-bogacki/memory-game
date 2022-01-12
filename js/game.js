@@ -8,6 +8,8 @@ let difficulty = 0;
 let gameArray = [];
 let allCards = [];
 let actualPairs = [];
+let backCard = "../cards/back.png"
+
 
 for (let x = 1; x <= 35; x++){
     if (x < 10){
@@ -32,17 +34,17 @@ function initGame() {
     pairCardsToLevel(difficulty);
     shuffleCards();
     createArr(difficulty, gameField);
+    setTimeout(rotateCards, 3000);
 }
 
-function create_pairs(level){
-    if (level === "easy"){
-        return  8;
-    }
-    else if (level === "normal"){
-        return  16;
-    }
-    else if (level === "hard"){
-        return  32;
+
+function create_pairs(level) {
+    if (level === "easy") {
+        return 8;
+    } else if (level === "normal") {
+        return 16;
+    } else if (level === "hard") {
+        return 32;
     }
 }
 
@@ -133,8 +135,8 @@ function createArr(difficulty, gameField) {
             gameArray.shift()
         }
     }
-    // zatrzymanie czasu  zatrzymanie możliwości klikania for??
-    // odwrócenie elementów, podmiana obrazka na back.png
+    let holdBoard = document.getElementsByClassName('board');
+    holdBoard[0].style.pointerEvents = 'none';
 }
 
 function addRow(gameField) {
@@ -146,4 +148,13 @@ function addRow(gameField) {
 function addCell(rowElement, row, col, gameArray) {
     rowElement.insertAdjacentHTML('beforeend',
         `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="${gameArray[0]}"></div>`);
+}
+
+function rotateCards() {
+    let rotateElement = document.getElementsByClassName('card');
+    for (let element of rotateElement) {
+        element.innerHTML = `<img src=${backCard}>`
+    }
+    let runBoard = document.getElementsByClassName('board');
+    runBoard[0].style.pointerEvents = 'auto';
 }
