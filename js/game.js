@@ -71,6 +71,8 @@ function win_with_timeout(){
     clearInterval(lose);
     alert('YOU WIN');
     // zapis wyniku
+    saveItemToSessionStorageWithTime()
+    //
     location.href = 'index.html';
 
 }
@@ -78,8 +80,27 @@ function win_with_timeout(){
 function win_without_timeout(){
     alert('YOU WIN');
     // zapis wyniku
+    saveItemToSessionStorageWithoutTime()
+    //
     location.href = 'index.html';
 }
+
+//
+function saveItemToSessionStorageWithTime() {
+    if (0) {
+        sessionStorage.setItem('userName', "(nazwa użytkownika)")
+        sessionStorage.setItem('moves', moves)
+        sessionStorage.setItem('time', time)
+    }
+}
+
+function saveItemToSessionStorageWithoutTime() {
+    if (0) {
+        sessionStorage.setItem('userName', "(nazwa użytkownika)")
+        sessionStorage.setItem('moves', moves)
+    }
+}
+//
 
 function lose_with_timeout(){
     if (time === 0){
