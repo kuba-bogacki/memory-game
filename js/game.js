@@ -151,6 +151,15 @@ function addCell(rowElement, row, col, gameArray) {
         `<div class="card" data-row="${row}" data-col="${col}" image="${gameArray[0]}"><img src="${gameArray[0]}"></div>`);
 }
 
+function rotateCards() {
+    let rotateElement = document.getElementsByClassName('card');
+    for (let element of rotateElement) {
+        element.innerHTML = `<img src=${backCard}>`
+    }
+    let runBoard = document.getElementsByClassName('board');
+    runBoard[0].style.pointerEvents = 'auto';
+}
+
 function leftClick(){
     const fields = document.querySelectorAll('.board .row .card');
     for (let field of fields) {
@@ -206,14 +215,4 @@ function differentCards(){
         }
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
-}
-
-
-function rotateCards() {
-    let rotateElement = document.getElementsByClassName('card');
-    for (let element of rotateElement) {
-        element.innerHTML = `<img src=${backCard}>`
-    }
-    let runBoard = document.getElementsByClassName('board');
-    runBoard[0].style.pointerEvents = 'auto';
 }
