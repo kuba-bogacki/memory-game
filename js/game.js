@@ -103,6 +103,27 @@ function displayHighestScoreWithoutTime() {
     }
 }
 
+function displayAllHighestScores() {
+    if (sessionStorage.getItem("timeEasy")) {
+        document.getElementById('easy-with-time').innerHTML = "Easy with time: " + sessionStorage.getItem("userNameTimeEasy") + " " + sessionStorage.getItem("timeEasy") + "s";
+    }
+    if (sessionStorage.getItem("timeNormal")) {
+        document.getElementById('normal-with-time').innerHTML = "Normal with time: " + sessionStorage.getItem("userNameTimeNormal") + " " + sessionStorage.getItem("timeNormal") + "s";
+    }
+    if (sessionStorage.getItem("timeHard")) {
+        document.getElementById('hard-with-time').innerHTML = "Hard with time: " + sessionStorage.getItem("userNameTimeHard") + " " + sessionStorage.getItem("timeHard") + "s";
+    }
+    if (sessionStorage.getItem("movesEasy")) {
+        document.getElementById('easy-without-time').innerHTML = "Easy without time: " + sessionStorage.getItem("userNameEasy") + " " + sessionStorage.getItem("movesEasy") + " moves";
+    }
+    if (sessionStorage.getItem("MovesNormal")) {
+        document.getElementById('normal-without-time').innerHTML = "Normal without time: " + sessionStorage.getItem("userNameNormal") + " " + sessionStorage.getItem("movesNormal") + " moves";
+    }
+    if (sessionStorage.getItem("movesHard")) {
+        document.getElementById('hard-without-time').innerHTML = "Hard without time: " + sessionStorage.getItem("userNameHard") + " " + sessionStorage.getItem("movesHard") + " moves";
+    }
+}
+
 
 function decrease_time(){
     time -= 1;
