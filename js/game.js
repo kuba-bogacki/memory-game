@@ -92,7 +92,7 @@ function displayHighestScoreWithTime() {
 }
 
 function displayHighestScoreWithoutTime() {
-if (level === 'easy' && sessionStorage.getItem("movesEasy") !== null) {
+    if (level === 'easy' && sessionStorage.getItem("movesEasy") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesEasy") + "</h4>";
     } else if (level === 'normal' && sessionStorage.getItem("movesNormal") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesNormal") + "</h4>";
