@@ -206,7 +206,7 @@ function lose_with_timeout(){
 }
 
 function pairCardsToLevel(difficulty) {
-    while (gameArray.length <= difficulty * 2) {
+    while (gameArray.length < difficulty * 2) {
         let item = allCards[Math.floor(Math.random() * allCards.length)];
         if (!gameArray.includes(item)) {
             gameArray.push(item);

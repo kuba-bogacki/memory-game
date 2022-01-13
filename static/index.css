@@ -1,3 +1,10 @@
+body {
+    background: url("https://cdn.wallpapersafari.com/26/38/suc4Nm.jpeg");
+    padding: 25px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
 .background-box {
     background-color: darkgray;
     border-color: grey;
