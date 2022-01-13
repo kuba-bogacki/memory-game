@@ -184,10 +184,10 @@ function saveItemToSessionStorageWithoutTime() {
     if (level === 'easy' && (sessionStorage.getItem('movesEasy') > moves || sessionStorage.getItem('movesEasy') === null)) {
         setSessionItem('userNameEasy', 'movesEasy', moves + 1);
     }
-    if (level === 'normal' && (sessionStorage.getItem('movesNormal') > moves || sessionStorage.getItem('movesEasy') === null)){
+    if (level === 'normal' && (sessionStorage.getItem('movesNormal') > moves || sessionStorage.getItem('movesNormal') === null)){
         setSessionItem('userNameNormal', 'movesNormal', moves + 1);
     }
-    if (level === 'hard' && (sessionStorage.getItem('movesHard') > moves || sessionStorage.getItem('movesEasy') === null)) {
+    if (level === 'hard' && (sessionStorage.getItem('movesHard') > moves || sessionStorage.getItem('movesHard') === null)) {
         setSessionItem('userNameHard', 'movesHard', moves + 1);
     }
 }
