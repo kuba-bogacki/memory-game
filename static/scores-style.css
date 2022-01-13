@@ -1,5 +1,8 @@
 body {
-    background-color: rgba(233,230,227,0.92);
+    background: url("https://cdn.wallpapersafari.com/26/38/suc4Nm.jpeg");
+    padding: 25px;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .flex-container {
@@ -61,8 +64,9 @@ body {
     touch-action: manipulation;
 }
 
-.button:hover {
-    transform: scale(1.20) rotate(-2deg);
+.button:hover, .player:hover, .scores:hover {
+    transform: scale(1.1) rotate(-1deg);
+    transition: all 250ms;
 }
 
 .footer {
@@ -72,3 +76,4 @@ body {
     text-align: center;
     position: absolute;
 }
+
