@@ -3,47 +3,42 @@
 <head>
     <title>Javascript Game</title>
     <meta charset="UTF-8">
-    <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
     <link href="../static/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="background-box">
-        <div class="welcome">
-            <h1 class="welcome-text">Welcome</h1>
-        </div>
-        <div class="welcome">
-            <form action="game.html">
-                <div>
-                    <h1 class="select-text">Enter your name</h1>
-                </div>
-                <div>
-                    <input type="text" name="user-name" class="select">
-                </div>
-                <div>
-                    <h1 class="select-text">Select level</h1>
-                </div>
-                <div>
-                    <select name="level_of_difficulty" class="select">
-                        <option value="easy">Easy</option>
-                        <option value="normal">Normal</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                </div>
-                <div>
-                    <h1 class="select-text">Do you want time limit</h1>
-                </div>
-                <div>
-                    <select name="is_time" class="select">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <div>
-                    <input type="submit" name="start_game" class="start_game_button" value="Start Game">
-                </div>
-            </form>
-        </div>
+    <div class="welcome">
+        <form action="game.html">
+            <div class="name-text">
+                <h1 class="select-text">Enter your name</h1>
+            </div>
+            <div class="input-text">
+                <input type="text" name="user-name" class="select">
+            </div>
+            <div class="select-level">
+                <h1 class="select-text">Select level</h1>
+                <select name="level_of_difficulty" class="select">
+                    <option value="easy">Easy</option>
+                    <option value="normal">Normal</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="time-limit">
+                <h1 class="select-text">Time limit</h1>
+                <select name="is_time" class="select">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="game-button">
+                <input type="submit" name="start_game" class="button_in_menu" value="Start Game">
+            </div>
+        </form>
+        <form action="scores.html">
+            <div class="scores-button">
+                <input type="submit" name="scores" class="button_in_menu" value="Scores">
+            </div>
+        </form>
     </div>
 </body>
 </html>

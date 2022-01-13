@@ -142,56 +142,42 @@ function win_without_timeout() {
 
 function saveItemToSessionStorageWithTime() {
 
-        if (level === 'easy') {
-            if (sessionStorage.getItem('time') < time) {
-                sessionStorage.removeItem('userNameTimeEasy');
-                sessionStorage.removeItem('timeEasy');
-                sessionStorage.setItem('userNameTimeEasy', "(nazwa użytkownika)");
-                sessionStorage.setItem('timeEasy', time);
-            }
+        if (level === 'easy' && sessionStorage.getItem('time') < time) {
+            sessionStorage.removeItem('userNameTimeEasy');
+            sessionStorage.removeItem('timeEasy');
+            sessionStorage.setItem('userNameTimeEasy', "(nazwa użytkownika)");
+            sessionStorage.setItem('timeEasy', time);
         }
-        else if (level === 'normal') {
-            if (sessionStorage.getItem('time') < time) {
-                sessionStorage.removeItem('userNameTimeNormal');
-                sessionStorage.removeItem('timeNormal');
-                sessionStorage.setItem('userNameTimeNormal', "(nazwa użytkownika)");
-                sessionStorage.setItem('timeNormal', time);
-            }
+        else if (level === 'normal' && sessionStorage.getItem('time') < time) {
+            sessionStorage.removeItem('userNameTimeNormal' && 'timeNormal');
+            sessionStorage.setItem('userNameTimeNormal', "(nazwa użytkownika)");
+            sessionStorage.setItem('timeNormal', time);
         }
-        else if (level === 'hard') {
-            if (sessionStorage.getItem('time') < time) {
-                sessionStorage.removeItem('userNameTimeHard');
-                sessionStorage.removeItem('timeHard');
-                sessionStorage.setItem('userNameTimeHard', "(nazwa użytkownika)");
-                sessionStorage.setItem('timeHard', time);
-            }
+        else if (level === 'hard' && sessionStorage.getItem('time') < time) {
+            sessionStorage.removeItem('userNameTimeHard');
+            sessionStorage.removeItem('timeHard');
+            sessionStorage.setItem('userNameTimeHard', "(nazwa użytkownika)");
+            sessionStorage.setItem('timeHard', time);
         }
 }
 
 function saveItemToSessionStorageWithoutTime() {
-    if (level === 'easy') {
-        if (sessionStorage.getItem('movesEasy') < moves) {
-            sessionStorage.removeItem('userNameEasy');
-            sessionStorage.removeItem('movesEasy');
-            sessionStorage.setItem('userNameEasy', "(nazwa użytkownika)");
-            sessionStorage.setItem('movesEasy', moves);
-        }
+    if (level === 'easy' && sessionStorage.getItem('movesEasy') < moves) {
+        sessionStorage.removeItem('userNameEasy' && 'movesEasy');
+        sessionStorage.setItem('userNameEasy', "(nazwa użytkownika)");
+        sessionStorage.setItem('movesEasy', moves);
     }
-    if (level === 'normal') {
-        if (sessionStorage.getItem('movesNormal') < moves) {
+    if (level === 'normal' && sessionStorage.getItem('movesNormal') < moves){
             sessionStorage.removeItem('userNameNormal');
             sessionStorage.removeItem('movesNormal');
             sessionStorage.setItem('userNameNormal', "(nazwa użytkownika)");
             sessionStorage.setItem('movesNormal', moves);
-        }
     }
-    if (level === 'hard') {
-        if (sessionStorage.getItem('movesHard') < moves) {
-            sessionStorage.removeItem('userNameHard');
-            sessionStorage.removeItem('movesHard');
-            sessionStorage.setItem('userNameHard', "(nazwa użytkownika)");
-            sessionStorage.setItem('movesHard', moves);
-        }
+    if (level === 'hard' && sessionStorage.getItem('movesHard') < moves) {
+        sessionStorage.removeItem('userNameHard');
+        sessionStorage.removeItem('movesHard');
+        sessionStorage.setItem('userNameHard', "(nazwa użytkownika)");
+        sessionStorage.setItem('movesHard', moves);
     }
 }
 

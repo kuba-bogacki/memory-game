@@ -5,11 +5,17 @@ body {
     background-size: 100%;
 }
 
+img {
+    width: 80px;
+    height: 100px;
+}
+
 .background-box {
     background-color: darkgray;
     border-color: grey;
     border: 3px solid;
     border-radius: 3em;
+    margin: 0% 10% 0% 10%;
     padding: 50px 50px 50px 50px;
 }
 
@@ -29,7 +35,7 @@ body {
 }
 
 
-.start_game_button {
+.button_in_menu {
     background-color: white;
     border-radius: 0.3em;
     color: black;
@@ -37,14 +43,55 @@ body {
     font-size: 3em;
     margin: 1.5em 0 0;
     text-align: center;
-    width: 20%;
-}
-
-
-.welcome {
-    text-align: center;
 }
 
 .welcome-text {
     font-size: 10em;
+}
+
+/***grid***/
+form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*grid-template-rows: repeat(5, 1fr);*/
+    grid-template-rows: 100px 100px 100px 100px 100px;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.welcome {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+}
+
+.name-text {
+    grid-column: 1/4;
+    grid-row: 1;
+}
+
+.input-text {
+    grid-column: 1/4;
+    grid-row: 2;
+}
+
+.select-level {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.time-limit {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.game-button {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+.scores-button {
+    grid-column: 2;
+    grid-row: 5;
+    text-align: center;
 }
