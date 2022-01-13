@@ -57,7 +57,7 @@ function initGame() {
 
 function create_pairs(level) {
     if (level === "easy") {
-        return 4;
+        return 8;
     } else if (level === "normal") {
         return 16;
     } else if (level === "hard") {
@@ -266,7 +266,7 @@ function rotateCards() {
 function leftClick() {
     const fields = document.querySelectorAll('.board .row .card');
     for (let field of fields) {
-        // we add the same event listener for the right click (so called contextmenu) event
+        // we add the same event listener for the left click (so called click) event
         field.addEventListener('click', function (event) {
             // so if you left click on any field...
             if (actualPairs.length === 2){
