@@ -81,25 +81,46 @@ function create_time(level) {
 
 function displayHighestScoreWithTime() {
     if (level === 'easy') {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeEasy") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("userNameTimeEasy") + " " + sessionStorage.getItem("timeEasy") + "s" +"</h4>";
     }
     else if (level === 'normal') {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeNormal") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("userNameTimeNormal") + " " + sessionStorage.getItem("timeNormal") + "s" + "</h4>";
     }
     else if (level === 'hard') {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeHard") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("userNameTimeNormal") + " " + sessionStorage.getItem("timeHard") + "</h4>";
     }
 }
 
 function displayHighestScoreWithoutTime() {
     if (level === 'easy') {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesEasy") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("userNameEasy") + " " + sessionStorage.getItem("movesEasy") + "</h4>";
     }
     else if (level === 'normal') {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesNormal") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("userNameNormal") + " " + sessionStorage.getItem("movesNormal") + "</h4>";
     }
     else if (level === 'hard') {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesHard") + "</h4>";
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("userNameHard") + " " + sessionStorage.getItem("movesHard") + "</h4>";
+    }
+}
+
+function displayAllHighestScores() {
+    if (sessionStorage.getItem("timeEasy")) {
+        document.getElementById('easy-with-time').innerHTML = "Easy with time: " + sessionStorage.getItem("userNameTimeEasy") + " " + sessionStorage.getItem("timeEasy") + "s";
+    }
+    if (sessionStorage.getItem("timeNormal")) {
+        document.getElementById('normal-with-time').innerHTML = "Normal with time: " + sessionStorage.getItem("userNameTimeNormal") + " " + sessionStorage.getItem("timeNormal") + "s";
+    }
+    if (sessionStorage.getItem("timeHard")) {
+        document.getElementById('hard-with-time').innerHTML = "Hard with time: " + sessionStorage.getItem("userNameTimeHard") + " " + sessionStorage.getItem("timeHard") + "s";
+    }
+    if (sessionStorage.getItem("movesEasy")) {
+        document.getElementById('easy-without-time').innerHTML = "Easy without time: " + sessionStorage.getItem("userNameEasy") + " " + sessionStorage.getItem("movesEasy") + " moves";
+    }
+    if (sessionStorage.getItem("MovesNormal")) {
+        document.getElementById('normal-without-time').innerHTML = "Normal without time: " + sessionStorage.getItem("userNameNormal") + " " + sessionStorage.getItem("movesNormal") + " moves";
+    }
+    if (sessionStorage.getItem("movesHard")) {
+        document.getElementById('hard-without-time').innerHTML = "Hard without time: " + sessionStorage.getItem("userNameHard") + " " + sessionStorage.getItem("movesHard") + " moves";
     }
 }
 
@@ -142,7 +163,7 @@ function win_without_timeout() {
 
 function saveItemToSessionStorageWithTime() {
 
-        if (level === 'easy' && sessionStorage.getItem('time') < time) {
+        if (level === 'easy' && sessionStorage.getItem('timeEasy') < time) {
             sessionStorage.removeItem('userNameTimeEasy');
             sessionStorage.removeItem('timeEasy');
             sessionStorage.setItem('userNameTimeEasy', "(nazwa użytkownika)");

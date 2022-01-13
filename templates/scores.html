@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <title>Highest score</title>
     <link rel="stylesheet" href="../static/scores-style.css" type="text/css">
+    <script src="../js/game.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="displayAllHighestScores()">
     <div class="flex-container">
         <div class="flex-item">HIGHEST SCORE</div>
-        <div class="player"></div>
-        <div class="scores"></div>
-        <div class="scores"></div>
-        <div class="scores"></div>
-        <div class="scores"></div>
-        <div class="scores"></div>
-        <div class="scores"></div>
+        <div id="easy-with-time" class="scores">Easy with time: </div>
+        <div id="normal-with-time" class="scores">Normal with time: </div>
+        <div id="hard-with-time" class="scores">Hard with time: </div>
+        <div id="easy-without-time" class="scores">Easy without time: </div>
+        <div id="normal-without-time" class="scores">Normal without time: </div>
+        <div id="hard-without-time" class="scores">Hard without time: </div>
     </div>
     <div class="footer">
         <form action="index.html">
