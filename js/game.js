@@ -192,7 +192,7 @@ function lose_with_timeout(){
 }
 
 function pairCardsToLevel(difficulty) {
-    while (gameArray.length <= difficulty * 2) {
+    while (gameArray.length < difficulty * 2) {
         let item = allCards[Math.floor(Math.random() * allCards.length)];
         if (!gameArray.includes(item)) {
             gameArray.push(item);
@@ -258,6 +258,9 @@ function leftClick() {
         // we add the same event listener for the right click (so called contextmenu) event
         field.addEventListener('click', function (event) {
             // so if you left click on any field...
+            if (actualPairs.length === 2){
+                return;
+            }
             let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
             //console.log(card_image)
             flipCard.play()
@@ -267,6 +270,7 @@ function leftClick() {
 
             if (actualPairs.length === 2) {
                 let board = document.getElementById('board');
+                console.log(board);
                 board.style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
                 if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')) {
                     theSameCards();
@@ -300,7 +304,6 @@ function theSameCards() {
     }
     decrease_pairs();
     actualPairs = []; // czyszczenie tablicy
-
 }
 
 function differentCards() {
@@ -325,6 +328,7 @@ function change_time_statistic(stop, button, event) {
     }
     document.getElementById('time_button').innerHTML = button;
     stop_time = stop;
+    actualPairs = []; // czyszczenie tablicy
 }
 
 function stop_the_time() {
