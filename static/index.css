@@ -20,13 +20,14 @@ img {
 }
 
 .select {
-    background-color: white;
-    border-radius: 0.2em;
-    color: black;
-    /*font-family: Arial;*/
-    font-size: 2em;
-    margin: 0 0 0.5em;
-    padding: 10px 20px;
+    background-color: beige;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    border-radius: 10px; /* corner round */
+    border: 2px solid; /* div border */
+    border-color: black;
+    text-align: center; /* title on the center */
+    font-size: 20px;
+    padding: 10px 10px;
 }
 
 
@@ -35,14 +36,20 @@ img {
 }
 
 
-.button_in_menu {
-    background-color: white;
-    border-radius: 0.3em;
-    color: black;
-    /*font-family: Arial;*/
-    font-size: 3em;
-    margin: 1.5em 0 0;
-    text-align: center;
+.button{
+    background-color: beige;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    border-radius: 10px; /* corner round */
+    border-style: solid; /* div border */
+    border-color: black;
+    text-align: center; /* title on the center */
+    font-size: 20px;
+    padding: 10px 10px;
+}
+
+.button:hover {
+    transform: scale(1.1) rotate(-1deg);
+    transition: all 250ms;
 }
 
 .welcome-text {
