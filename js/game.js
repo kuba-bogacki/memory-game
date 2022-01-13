@@ -57,7 +57,7 @@ function initGame() {
 
 function create_pairs(level) {
     if (level === "easy") {
-        return 8;
+        return 4;
     } else if (level === "normal") {
         return 16;
     } else if (level === "hard") {
@@ -141,44 +141,33 @@ function win_without_timeout() {
     location.href = 'index.html';
 }
 
+function setSessionItem(user_name_key, win_key, win_value){
+    sessionStorage.setItem(user_name_key, user_name);
+    sessionStorage.setItem(win_key, win_value);
+}
+
 function saveItemToSessionStorageWithTime() {
 
-        if (level === 'easy' && sessionStorage.getItem('time') < time) {
-            sessionStorage.removeItem('userNameTimeEasy');
-            sessionStorage.removeItem('timeEasy');
-            sessionStorage.setItem('userNameTimeEasy', "(nazwa użytkownika)");
-            sessionStorage.setItem('timeEasy', time);
+        if (level === 'easy' && sessionStorage.getItem('timeEasy') < time) {
+            setSessionItem('userNameTimeEasy', 'timeEasy', time);
         }
-        else if (level === 'normal' && sessionStorage.getItem('time') < time) {
-            sessionStorage.removeItem('userNameTimeNormal' && 'timeNormal');
-            sessionStorage.setItem('userNameTimeNormal', "(nazwa użytkownika)");
-            sessionStorage.setItem('timeNormal', time);
+        else if (level === 'normal' && sessionStorage.getItem('timeNormal') < time) {
+            setSessionItem('userNameTimeNormal', 'timeNormal', time);
         }
-        else if (level === 'hard' && sessionStorage.getItem('time') < time) {
-            sessionStorage.removeItem('userNameTimeHard');
-            sessionStorage.removeItem('timeHard');
-            sessionStorage.setItem('userNameTimeHard', "(nazwa użytkownika)");
-            sessionStorage.setItem('timeHard', time);
+        else if (level === 'hard' && sessionStorage.getItem('timeHard') < time) {
+            setSessionItem('userNameTimeHard', 'timeHard', time);
         }
 }
 
 function saveItemToSessionStorageWithoutTime() {
-    if (level === 'easy' && sessionStorage.getItem('movesEasy') < moves) {
-        sessionStorage.removeItem('userNameEasy' && 'movesEasy');
-        sessionStorage.setItem('userNameEasy', "(nazwa użytkownika)");
-        sessionStorage.setItem('movesEasy', moves);
+    if (level === 'easy' && (sessionStorage.getItem('movesEasy') > moves || sessionStorage.getItem('movesEasy') === null)) {
+        setSessionItem('userNameEasy', 'movesEasy', moves + 1);
     }
-    if (level === 'normal' && sessionStorage.getItem('movesNormal') < moves){
-            sessionStorage.removeItem('userNameNormal');
-            sessionStorage.removeItem('movesNormal');
-            sessionStorage.setItem('userNameNormal', "(nazwa użytkownika)");
-            sessionStorage.setItem('movesNormal', moves);
+    if (level === 'normal' && (sessionStorage.getItem('movesNormal') > moves || sessionStorage.getItem('movesEasy') === null)){
+        setSessionItem('userNameNormal', 'movesNormal', moves + 1);
     }
-    if (level === 'hard' && sessionStorage.getItem('movesHard') < moves) {
-        sessionStorage.removeItem('userNameHard');
-        sessionStorage.removeItem('movesHard');
-        sessionStorage.setItem('userNameHard', "(nazwa użytkownika)");
-        sessionStorage.setItem('movesHard', moves);
+    if (level === 'hard' && (sessionStorage.getItem('movesHard') > moves || sessionStorage.getItem('movesEasy') === null)) {
+        setSessionItem('userNameHard', 'movesHard', moves + 1);
     }
 }
 
@@ -280,8 +269,8 @@ function leftClick() {
                     differentCards();
                     flipCards.play();
                 }
-                board.style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
                 increase_moves();
+                board.style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
             }
         });
     }
