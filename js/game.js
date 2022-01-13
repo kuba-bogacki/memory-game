@@ -17,6 +17,7 @@ let flipCards = new Audio('../sounds/flipcard.wav');
 let matchPair = new Audio('../sounds/match_pair.wav');
 let winGame = new Audio('../sounds/win.wav');
 let loseGame = new Audio('../sounds/lose.wav');
+let pauseGame = new Audio('../sounds/pause.wav');
 let backgroundMusic = new Audio('../sounds/background.wav');
 
 
@@ -273,6 +274,7 @@ function leftClick() {
             // so if you left click on any field...
             let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
             //console.log(card_image)
+            flipCard.play()
             field.innerHTML = '<img src=' + card_image + '>';
             actualPairs.push(field);
             field.style.pointerEvents = 'none';
@@ -285,7 +287,6 @@ function leftClick() {
                     matchPair.play()
                 } else {
                     differentCards();
-                    flipCards.play()
                 }
                 board.style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
                 increase_moves();
@@ -322,6 +323,7 @@ function differentCards() {
             card.innerHTML = '<img src="../cards/back.png">';
             card.style.pointerEvents = 'auto';
         }
+        flipCards.play()
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
 }
@@ -341,12 +343,14 @@ function change_time_statistic(stop, button, event) {
 
 function stop_the_time() {
     if (stop_time) {
+        pauseGame.play()
         change_time_statistic(false, 'PAUSE', 'auto');
         if (is_time === "yes") {
             timeCounter = setInterval(decrease_time, 1000);
             lose = setInterval(lose_with_timeout, 1000);
         }
     } else {
+        pauseGame.play()
         change_time_statistic(true, 'RESUME', 'none');
         if (is_time === "yes") {
             clearInterval(timeCounter);
