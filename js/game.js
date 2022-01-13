@@ -127,14 +127,14 @@ function increase_moves() {
 function win_with_timeout() {
     clearInterval(timeCounter);
     clearInterval(lose);
-    winGame.play()
+    winGame.play();
     alert('YOU WIN');
     saveItemToSessionStorageWithTime();
     location.href = 'index.html';
 }
 
 function win_without_timeout() {
-    winGame.play()
+    winGame.play();
     alert('YOU WIN');
     saveItemToSessionStorageWithoutTime();
     location.href = 'index.html';
@@ -185,7 +185,7 @@ function lose_with_timeout(){
     if (time === 0){
         clearInterval(timeCounter);
         clearInterval(lose);
-        loseGame.play()
+        loseGame.play();
         alert('TIME IS OVER');
         location.href = 'index.html';
     }
@@ -263,7 +263,7 @@ function leftClick() {
             }
             let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
             //console.log(card_image)
-            flipCard.play()
+            flipCard.play();
             field.innerHTML = '<img src=' + card_image + '>';
             actualPairs.push(field);
             field.style.pointerEvents = 'none';
@@ -274,9 +274,10 @@ function leftClick() {
                 board.style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
                 if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')) {
                     theSameCards();
-                    matchPair.play()
+                    matchPair.play();
                 } else {
                     differentCards();
+                    flipCards.play();
                 }
                 board.style.pointerEvents = 'auto'; // wznowienie ruuchu na planszy
                 increase_moves();
@@ -312,7 +313,7 @@ function differentCards() {
             card.innerHTML = '<img src="../cards/back.png">';
             card.style.pointerEvents = 'auto';
         }
-        flipCards.play()
+        flipCards.play();
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
 }
@@ -333,14 +334,14 @@ function change_time_statistic(stop, button, event) {
 
 function stop_the_time() {
     if (stop_time) {
-        pauseGame.play()
+        pauseGame.play();
         change_time_statistic(false, 'PAUSE', 'auto');
         if (is_time === "yes") {
             timeCounter = setInterval(decrease_time, 1000);
             lose = setInterval(lose_with_timeout, 1000);
         }
     } else {
-        pauseGame.play()
+        pauseGame.play();
         change_time_statistic(true, 'RESUME', 'none');
         if (is_time === "yes") {
             clearInterval(timeCounter);

@@ -17,18 +17,18 @@ body {
 .flex-item, .player, .scores {
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
     height: 10%;
-    margin-top: 30px;
     line-height: 90px;
     color: black;
-    font-family: monospace;
     grid-column: 1/4;
     grid-row: 1;
-    font-size: 5em;
+    font-size: 3em;
     text-align: center;
-    border-radius: 25px;
     background: beige;
     padding: 20px;
     width: 50%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
 }
 
 .player {
@@ -50,7 +50,6 @@ body {
     border-radius: 100px;
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
     color: black;
-    font-family: monospace;
     cursor: pointer;
     display: inline-block;
     padding: 7px 20px;

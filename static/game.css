@@ -19,6 +19,8 @@ body {
 }
 
 .time_box {
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    background: beige;
     text-align: center; /* title on the center */
     grid-column: 1; /*range columns*/
     grid-row: 2; /*range rows*/
@@ -35,6 +37,8 @@ body {
 }
 
 .move_box {
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    background: beige;
     grid-column: 3;
     grid-row: 2;
     border-radius: 10px; /* corner round */
@@ -68,12 +72,18 @@ body {
 }
 
 .button{
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
     border-radius: 10px; /* corner round */
     border-style: solid; /* div border */
     border-color: black;
     text-align: center; /* title on the center */
     font-size: 20px;
     padding: 10px 10px;
+}
+
+.button:hover {
+    transform: scale(1.1) rotate(-1deg);
+    transition: all 250ms;
 }
 
 /*kuba b*/
