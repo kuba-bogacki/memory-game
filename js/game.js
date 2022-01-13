@@ -80,28 +80,29 @@ function create_time(level) {
 }
 
 function displayHighestScoreWithTime() {
-    if (level === 'easy') {
+    if (level === 'easy' && sessionStorage.getItem("timeEasy") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeEasy") + "</h4>";
-    }
-    else if (level === 'normal') {
+    } else if (level === 'normal' && sessionStorage.getItem("timeNormal") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeNormal") + "</h4>";
-    }
-    else if (level === 'hard') {
+    } else if (level === 'hard' && sessionStorage.getItem("timeHard") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeHard") + "</h4>";
+    } else {
+        document.getElementById('highest_score').innerHTML = "";
     }
 }
 
 function displayHighestScoreWithoutTime() {
-    if (level === 'easy') {
+    if (level === 'easy' && sessionStorage.getItem("movesEasy") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesEasy") + "</h4>";
-    }
-    else if (level === 'normal') {
+    } else if (level === 'normal' && sessionStorage.getItem("movesNormal") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesNormal") + "</h4>";
-    }
-    else if (level === 'hard') {
+    } else if (level === 'hard' && sessionStorage.getItem("movesHard") !== null) {
         document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesHard") + "</h4>";
+    } else {
+        document.getElementById('highest_score').innerHTML = "";
     }
 }
+
 
 function decrease_time(){
     time -= 1;
