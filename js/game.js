@@ -12,6 +12,13 @@ let actualPairs = [];
 let user_name = '';
 let stop_time = false;
 let backCard = "../cards/back.png"
+let flipCard = new Audio('../sounds/flip.wav');
+let flipCards = new Audio('../sounds/flipcard.wav');
+let matchPair = new Audio('../sounds/match_pair.wav');
+let winGame = new Audio('../sounds/win.wav');
+let loseGame = new Audio('../sounds/lose.wav');
+let pauseGame = new Audio('../sounds/pause.wav');
+let backgroundMusic = new Audio('../sounds/background.wav');
 
 
 for (let x = 1; x <= 35; x++) {
@@ -38,6 +45,7 @@ function initGame() {
 
     pairs = create_pairs(level);
     difficulty = create_pairs(level);
+    playMusic()
     pairCardsToLevel(difficulty);
     shuffleCards();
     createArr(difficulty, gameField);
@@ -119,13 +127,14 @@ function increase_moves() {
 function win_with_timeout() {
     clearInterval(timeCounter);
     clearInterval(lose);
+    winGame.play()
     alert('YOU WIN');
     saveItemToSessionStorageWithTime();
     location.href = 'index.html';
-
 }
 
 function win_without_timeout() {
+    winGame.play()
     alert('YOU WIN');
     saveItemToSessionStorageWithoutTime();
     location.href = 'index.html';
@@ -176,6 +185,7 @@ function lose_with_timeout(){
     if (time === 0){
         clearInterval(timeCounter);
         clearInterval(lose);
+        loseGame.play()
         alert('TIME IS OVER');
         location.href = 'index.html';
     }
@@ -231,6 +241,7 @@ function rotateCards() {
     for (let element of rotateElement) {
         element.innerHTML = `<img src=${backCard}>`
     }
+    flipCards.play();
     let runBoard = document.getElementsByClassName('board');
     runBoard[0].style.pointerEvents = 'auto';
     if (is_time === "yes") {
@@ -240,6 +251,7 @@ function rotateCards() {
     }
 }
 
+
 function leftClick() {
     const fields = document.querySelectorAll('.board .row .card');
     for (let field of fields) {
@@ -248,6 +260,7 @@ function leftClick() {
             // so if you left click on any field...
             let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
             //console.log(card_image)
+            flipCard.play()
             field.innerHTML = '<img src=' + card_image + '>';
             actualPairs.push(field);
             field.style.pointerEvents = 'none';
@@ -257,6 +270,7 @@ function leftClick() {
                 board.style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
                 if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')) {
                     theSameCards();
+                    matchPair.play()
                 } else {
                     differentCards();
                 }
@@ -295,6 +309,7 @@ function differentCards() {
             card.innerHTML = '<img src="../cards/back.png">';
             card.style.pointerEvents = 'auto';
         }
+        flipCards.play()
         actualPairs = []; // czyszczenie tablicy
     }, 1000); // wstrzymanie czasu
 }
@@ -314,16 +329,25 @@ function change_time_statistic(stop, button, event) {
 
 function stop_the_time() {
     if (stop_time) {
+        pauseGame.play()
         change_time_statistic(false, 'PAUSE', 'auto');
         if (is_time === "yes") {
             timeCounter = setInterval(decrease_time, 1000);
             lose = setInterval(lose_with_timeout, 1000);
         }
     } else {
+        pauseGame.play()
         change_time_statistic(true, 'RESUME', 'none');
         if (is_time === "yes") {
             clearInterval(timeCounter);
             clearInterval(lose);
         }
     }
+}
+
+function playMusic() {
+    if (typeof backgroundMusic.loop == 'boolean') {
+        backgroundMusic.loop = true;
+    }
+    backgroundMusic.play();
 }
