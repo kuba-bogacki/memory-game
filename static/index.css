@@ -3,6 +3,7 @@
     border-color: grey;
     border: 3px solid;
     border-radius: 3em;
+    margin: 0% 10% 0% 10%;
     padding: 50px 50px 50px 50px;
 }
 
@@ -40,4 +41,8 @@
 
 .welcome-text {
     font-size: 10em;
+}
+
+#menu-table {
+    margin: 0% 0% 0% 20%;
 }
