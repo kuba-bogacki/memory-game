@@ -37,9 +37,9 @@ async function initGame() {
     level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
     let gameField = document.getElementById("board");
     if (is_time === "yes") {
-        displayHighestScoreWithTime();
+        await displayHighestScoreWithTime();
     } else {
-        displayHighestScoreWithoutTime();
+        await displayHighestScoreWithoutTime();
     }
 
     pairs = create_pairs(level);
