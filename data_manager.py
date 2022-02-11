@@ -1,8 +1,5 @@
-import uuid
 import os
-from posixpath import join
-from psycopg2 import sql
-from werkzeug.utils import secure_filename
+
 import database_common
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -29,3 +26,14 @@ def update_score(cursor, new_score):
         WHERE game_type = %s;
         """
     cursor.execute(query, (new_score['user_name'], new_score['score'], new_score['game_type']))
+
+
+@database_common.connection_handler
+def get_the_best_score_for_the_game_type(cursor, game):
+    query = """
+SELECT score
+FROM scores
+WHERE game_type = %s;
+        """
+    cursor.execute(query, (game, ))
+    return cursor.fetchone()

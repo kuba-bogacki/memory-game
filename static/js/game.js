@@ -28,7 +28,7 @@ for (let x = 1; x <= 35; x++) {
     allCards.push('../static/cards/card_' + x + '.png');
 }
 
-function initGame() {
+async function initGame() {
     const queryString = window.location.search; // zwraca cały url
     const urlParams = new URLSearchParams(queryString); // odcina to co jest po ? wyciąga klucze i wartości
     is_time = urlParams.get('is_time'); // wyciągam konkretną wartość
@@ -36,10 +36,9 @@ function initGame() {
     create_user_name();
     level = urlParams.get('level_of_difficulty'); // wyciągam konkretną wartość
     let gameField = document.getElementById("board");
-    if (is_time === "yes"){
+    if (is_time === "yes") {
         displayHighestScoreWithTime();
-    }
-    else {
+    } else {
         displayHighestScoreWithoutTime();
     }
 
@@ -50,7 +49,7 @@ function initGame() {
     shuffleCards();
     createArr(difficulty, gameField);
     setTimeout(rotateCards, 3000);
-    leftClick();
+    await leftClick();
     rightClick();
     document.getElementById('time_button').addEventListener('click', stop_the_time);
 }
@@ -79,25 +78,25 @@ function create_time(level) {
     }
 }
 
-function displayHighestScoreWithTime() {
-    if (level === 'easy' && sessionStorage.getItem("timeEasy") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeEasy") + "</h4>";
-    } else if (level === 'normal' && sessionStorage.getItem("timeNormal") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeNormal") + "</h4>";
-    } else if (level === 'hard' && sessionStorage.getItem("timeHard") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + sessionStorage.getItem("timeHard") + "</h4>";
+async function displayHighestScoreWithTime() {
+    if (level === 'easy' && await theBestScore('time_easy') !== 0) {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + await theBestScore('time_easy') + "</h4>";
+    } else if (level === 'normal' && await theBestScore('time_medium') !== 0) {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + await theBestScore('time_medium') + "</h4>";
+    } else if (level === 'hard' && await theBestScore('time_hard') !== 0) {
+        document.getElementById('highest_score').innerHTML = "<h4>Best time: " + await theBestScore('time_hard') + "</h4>";
     } else {
         document.getElementById('highest_score').innerHTML = "";
     }
 }
 
-function displayHighestScoreWithoutTime() {
-    if (level === 'easy' && sessionStorage.getItem("movesEasy") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesEasy") + "</h4>";
-    } else if (level === 'normal' && sessionStorage.getItem("movesNormal") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesNormal") + "</h4>";
-    } else if (level === 'hard' && sessionStorage.getItem("movesHard") !== null) {
-        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + sessionStorage.getItem("movesHard") + "</h4>";
+async function displayHighestScoreWithoutTime() {
+    if (level === 'easy' && await theBestScore('no_time_easy') !== null) {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + await theBestScore('no_time_easy') + "</h4>";
+    } else if (level === 'normal' && await theBestScore('no_time_medium') !== null) {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + await theBestScore('no_time_medium') + "</h4>";
+    } else if (level === 'hard' && await theBestScore('no_time_hard') !== null) {
+        document.getElementById('highest_score').innerHTML = "<h4>Fewest movements: " + await theBestScore('no_time_hard') + "</h4>";
     } else {
         document.getElementById('highest_score').innerHTML = "";
     }
@@ -134,18 +133,18 @@ async function displayAllHighestScores() {
 }
 
 
-function decrease_time(){
+function decrease_time() {
     time -= 1;
     document.getElementsByClassName('time_box')[0].innerHTML = "<h3>Time left: " + time + "</h3>";
 }
 
-function decrease_pairs() {
+async function decrease_pairs() {
     pairs -= 1;
     if (pairs === 0 && is_time === 'yes') {
-        win_with_timeout();
+        await win_with_timeout();
     }
     if (pairs === 0 && is_time === 'no') {
-        win_without_timeout();
+        await win_without_timeout();
     }
 
 }
@@ -155,59 +154,66 @@ function increase_moves() {
     document.getElementsByClassName('move_box')[0].innerHTML = "<h3>Total moves: " + moves + "</h3>";
 }
 
-function win_with_timeout() {
+async function win_with_timeout() {
     clearInterval(timeCounter);
     clearInterval(lose);
     winGame.play();
     alert('YOU WIN');
-    saveItemToSessionStorageWithTime();
-    location.href = 'index.html';
+    await saveScoreWithTime();
+    location.href = '/main';
 }
 
-function win_without_timeout() {
+async function win_without_timeout() {
     winGame.play();
     alert('YOU WIN');
-    saveItemToSessionStorageWithoutTime();
-    location.href = 'index.html';
+    await saveScoreWithoutTime();
+    location.href = '/main';
 }
 
-function setSessionItem(user_name_key, win_key, win_value){
-    sessionStorage.setItem(user_name_key, user_name);
-    sessionStorage.setItem(win_key, win_value);
+async function save(score, type) {
+    return await fetch("/api/score_update", {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user_name: user_name, score: score, game_type: type})
+    })
+        ;
 }
 
-function saveItemToSessionStorageWithTime() {
-
-        if (level === 'easy' && sessionStorage.getItem('timeEasy') < time) {
-            setSessionItem('userNameTimeEasy', 'timeEasy', time);
-        }
-        else if (level === 'normal' && sessionStorage.getItem('timeNormal') < time) {
-            setSessionItem('userNameTimeNormal', 'timeNormal', time);
-        }
-        else if (level === 'hard' && sessionStorage.getItem('timeHard') < time) {
-            setSessionItem('userNameTimeHard', 'timeHard', time);
-        }
+async function theBestScore(game_type){
+    let response = await fetch("/api/the_best_score/" + game_type);
+    let json = await response.json();
+    return json['score'];
 }
 
-function saveItemToSessionStorageWithoutTime() {
-    if (level === 'easy' && (sessionStorage.getItem('movesEasy') > moves || sessionStorage.getItem('movesEasy') === null)) {
-        setSessionItem('userNameEasy', 'movesEasy', moves + 1);
-    }
-    if (level === 'normal' && (sessionStorage.getItem('movesNormal') > moves || sessionStorage.getItem('movesNormal') === null)){
-        setSessionItem('userNameNormal', 'movesNormal', moves + 1);
-    }
-    if (level === 'hard' && (sessionStorage.getItem('movesHard') > moves || sessionStorage.getItem('movesHard') === null)) {
-        setSessionItem('userNameHard', 'movesHard', moves + 1);
+async function saveScoreWithTime() {
+    if (level === 'easy' && await theBestScore('time_easy') < time) {
+        await save(time, 'time_easy');
+    } else if (level === 'normal' && await theBestScore('time_medium') < time) {
+        await save(time, 'time_medium');
+    } else if (level === 'hard' && await theBestScore('time_hard') < time) {
+        await save(time, 'time_hard');
     }
 }
 
-function lose_with_timeout(){
-    if (time === 0){
+async function saveScoreWithoutTime() {
+    if (level === 'easy' && (await theBestScore('no_time_easy') > moves || await theBestScore('no_time_easy') === null)) {
+        await save(moves + 1, 'no_time_easy');
+    }
+    if (level === 'normal' && (await theBestScore('no_time_medium') > moves || await theBestScore('no_time_medium') === null)) {
+        await save(moves + 1, 'no_time_medium');
+    }
+    if (level === 'hard' && (await theBestScore('no_time_hard') > moves || await theBestScore('no_time_hard') === null)) {
+        await save(moves + 1, 'no_time_hard');
+    }
+}
+
+function lose_with_timeout() {
+    if (time === 0) {
         clearInterval(timeCounter);
         clearInterval(lose);
         loseGame.play();
         alert('TIME IS OVER');
-        location.href = 'index.html';
+        location.href = '/main';
     }
 }
 
@@ -276,9 +282,9 @@ function leftClick() {
     const fields = document.querySelectorAll('.board .row .card');
     for (let field of fields) {
         // we add the same event listener for the left click (so called click) event
-        field.addEventListener('click', function (event) {
+        field.addEventListener('click', async function (event) {
             // so if you left click on any field...
-            if (actualPairs.length === 2){
+            if (actualPairs.length === 2) {
                 return;
             }
             let card_image = field.getAttribute('image'); // pobiera atrybut obiektu na który klikamy
@@ -293,7 +299,7 @@ function leftClick() {
                 console.log(board);
                 board.style.pointerEvents = 'none'; // zatrzymanie ruuchu na planszy
                 if (actualPairs[0].getAttribute('image') === actualPairs[1].getAttribute('image')) {
-                    theSameCards();
+                    await theSameCards();
                     matchPair.play();
                 } else {
                     differentCards();
@@ -317,13 +323,13 @@ function rightClick() {
     }
 }
 
-function theSameCards() {
+async function theSameCards() {
     for (let card of actualPairs) {
         card.style.opacity = 0.3;
         card.setAttribute('reverse', 'true');  // ustawianie atrybutu obiektu
         card.style.pointerEvents = 'none'; // turn off clicking on the element
     }
-    decrease_pairs();
+    await decrease_pairs();
     actualPairs = []; // czyszczenie tablicy
 }
 

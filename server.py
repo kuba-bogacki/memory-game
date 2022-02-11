@@ -32,5 +32,10 @@ def api_update_score():
     return 'changed'
 
 
+@app.route('/api/the_best_score/<game_type>')
+def api_the_best_score(game_type):
+    return jsonify(data_manager.get_the_best_score_for_the_game_type(game_type))
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
