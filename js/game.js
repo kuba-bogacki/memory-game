@@ -57,7 +57,7 @@ function initGame() {
 
 function create_pairs(level) {
     if (level === "easy") {
-        return 8;
+        return 4;
     } else if (level === "normal") {
         return 16;
     } else if (level === "hard") {
