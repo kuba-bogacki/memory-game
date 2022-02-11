@@ -56,11 +56,11 @@ async function initGame() {
 
 function create_pairs(level) {
     if (level === "easy") {
-        return 4;
+        return 8;
     } else if (level === "normal") {
         return 16;
     } else if (level === "hard") {
-        return 32;
+        return 30;
     }
 }
 
@@ -237,8 +237,11 @@ function shuffleCards() {
 }
 
 function createArr(difficulty, gameField) {
-    console.log(difficulty);
-    let rows = (difficulty * 2) / 8;
+    let amount_rows = 8;
+    if (difficulty === 30){
+        amount_rows = 12;
+    }
+    let rows = (difficulty * 2) / amount_rows;
     let cols = (difficulty * 2) / rows;
     for (let row = 0; row < rows; row++) {
         let rowElement = addRow(gameField);
