@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
-    <link href="../static/game.css" rel="stylesheet" type="text/css">
-    <script src="../js/game.js" type="text/javascript"></script>
+    <link href="../static/css/game.css" rel="stylesheet" type="text/css">
+    <script src="../static/js/game.js" type="text/javascript"></script>
 </head>
 <body onload="initGame()">
     <div class="main">
@@ -17,9 +17,7 @@
         </div>
         <div class="username"><h4>Your name:</h4></div>
         <div class="back_to_menu">
-            <form action="index.html">
-                <input class="button" type="submit" value="BACK TO  MENU">
-            </form>
+            <input class="button" onclick="location.href='/main'" type="submit" value="BACK TO  MENU">
         </div>
         <div id="board" class="board"></div>
     </div>

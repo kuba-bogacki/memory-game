@@ -4,16 +4,16 @@
     <title>Javascript Game</title>
     <meta charset="UTF-8">
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
-    <link href="../static/index.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="welcome">
-        <form action="game.html">
+        <form action="/game">
             <div class="name-text">
                 <h1 class="select-text">Enter your name</h1>
             </div>
             <div class="input-text">
-                <input type="text" name="user-name" class="select" required>
+                <input type="text" name="user-name" class="select" maxlength="15" required>
             </div>
             <div class="select-level">
                 <h1 class="select-text">Select level</h1>
@@ -35,7 +35,7 @@
             </div>
         </form>
             <div class="scores-button">
-                <button onclick="location.href='scores.html'" class="button">Scores</button>
+                <button onclick="location.href='/scores'" class="button">Scores</button>
             </div>
     </div>
 </body>

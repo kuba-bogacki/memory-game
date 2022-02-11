@@ -11,21 +11,21 @@ let allCards = [];
 let actualPairs = [];
 let user_name = '';
 let stop_time = false;
-let backCard = "../cards/back.png"
-let flipCard = new Audio('../sounds/flip.wav');
-let flipCards = new Audio('../sounds/flipcard.wav');
-let matchPair = new Audio('../sounds/match_pair.wav');
-let winGame = new Audio('../sounds/win.wav');
-let loseGame = new Audio('../sounds/lose.wav');
-let pauseGame = new Audio('../sounds/pause.wav');
-let backgroundMusic = new Audio('../sounds/background.wav');
+let backCard = "../static/cards/back.png"
+let flipCard = new Audio('../static/sounds/flip.wav');
+let flipCards = new Audio('../static/sounds/flipcard.wav');
+let matchPair = new Audio('../static/sounds/match_pair.wav');
+let winGame = new Audio('../static/sounds/win.wav');
+let loseGame = new Audio('../static/sounds/lose.wav');
+let pauseGame = new Audio('../static/sounds/pause.wav');
+let backgroundMusic = new Audio('../static/sounds/background.wav');
 
 
 for (let x = 1; x <= 35; x++) {
     if (x < 10) {
         x = "0" + x.toString();
     }
-    allCards.push('../cards/card_' + x + '.png');
+    allCards.push('../static/cards/card_' + x + '.png');
 }
 
 function initGame() {
@@ -103,24 +103,33 @@ function displayHighestScoreWithoutTime() {
     }
 }
 
-function displayAllHighestScores() {
-    if (sessionStorage.getItem("timeEasy")) {
-        document.getElementById('easy-with-time').innerHTML = "Easy with time: " + sessionStorage.getItem("userNameTimeEasy") + " " + sessionStorage.getItem("timeEasy") + "s";
-    }
-    if (sessionStorage.getItem("timeNormal")) {
-        document.getElementById('normal-with-time').innerHTML = "Normal with time: " + sessionStorage.getItem("userNameTimeNormal") + " " + sessionStorage.getItem("timeNormal") + "s";
-    }
-    if (sessionStorage.getItem("timeHard")) {
-        document.getElementById('hard-with-time').innerHTML = "Hard with time: " + sessionStorage.getItem("userNameTimeHard") + " " + sessionStorage.getItem("timeHard") + "s";
-    }
-    if (sessionStorage.getItem("movesEasy")) {
-        document.getElementById('easy-without-time').innerHTML = "Easy without time: " + sessionStorage.getItem("userNameEasy") + " " + sessionStorage.getItem("movesEasy") + " moves";
-    }
-    if (sessionStorage.getItem("MovesNormal")) {
-        document.getElementById('normal-without-time').innerHTML = "Normal without time: " + sessionStorage.getItem("userNameNormal") + " " + sessionStorage.getItem("movesNormal") + " moves";
-    }
-    if (sessionStorage.getItem("movesHard")) {
-        document.getElementById('hard-without-time').innerHTML = "Hard without time: " + sessionStorage.getItem("userNameHard") + " " + sessionStorage.getItem("movesHard") + " moves";
+async function loadScores() {
+    let response = await fetch("/api/all_scores");
+    return await response.json();
+
+}
+
+async function displayAllHighestScores() {
+    let scores = await loadScores();
+    for (let score of scores) {
+        if (score['game_type'] === 'time_easy') {
+            document.getElementById('easy-with-time').innerHTML = "Easy with time: " + score['user_name'] + " " + score['score'] + "s";
+        }
+        if (score['game_type'] === 'time_medium') {
+            document.getElementById('normal-with-time').innerHTML = "Normal with time: " + score['user_name'] + " " + score['score'] + "s";
+        }
+        if (score['game_type'] === 'time_hard') {
+            document.getElementById('hard-with-time').innerHTML = "Hard with time: " + score['user_name'] + " " + score['score'] + "s";
+        }
+        if (score['game_type'] === 'no_time_easy') {
+            document.getElementById('easy-without-time').innerHTML = "Easy: " + score['user_name'] + " " + score['score'] + " moves";
+        }
+        if (score['game_type'] === 'no_time_medium') {
+            document.getElementById('normal-without-time').innerHTML = "Normal: " + score['user_name'] + " " + score['score'] + " moves";
+        }
+        if (score['game_type'] === 'no_time_hard') {
+            document.getElementById('hard-without-time').innerHTML = "Hard: " + score['user_name'] + " " + score['score'] + " moves";
+        }
     }
 }
 
@@ -321,7 +330,7 @@ function theSameCards() {
 function differentCards() {
     setTimeout(() => {
         for (let card of actualPairs) {
-            card.innerHTML = '<img src="../cards/back.png">';
+            card.innerHTML = '<img src="../static/cards/back.png">';
             card.style.pointerEvents = 'auto';
         }
         flipCards.play();

@@ -5,9 +5,19 @@ import data_manager
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/main')
 def main_page():
     return render_template('index.html')
+
+
+@app.route('/game')
+def game():
+    return render_template('game.html')
+
+
+@app.route('/scores')
+def scores():
+    return render_template('scores.html')
 
 
 @app.route('/api/all_scores')
