@@ -19,3 +19,13 @@ def get_all_scores(cursor):
         """
     cursor.execute(query)
     return cursor.fetchall()
+
+
+@database_common.connection_handler
+def update_score(cursor, new_score):
+    query = """
+        UPDATE scores
+        SET user_name = %s, score = %s
+        WHERE game_type = %s;
+        """
+    cursor.execute(query, (new_score['user_name'], new_score['score'], new_score['game_type']))
